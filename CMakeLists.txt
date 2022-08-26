@@ -178,7 +178,8 @@ if (EMSCRIPTEN)
   foreach(file
       "style.css"
       "index.html"
-      "run_diagon.sh")
+      "run_diagon.sh"
+      "package.json")
     configure_file(
       ${CMAKE_CURRENT_SOURCE_DIR}/src/${file}
       ${CMAKE_CURRENT_BINARY_DIR}/${file}

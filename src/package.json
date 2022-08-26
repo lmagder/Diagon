@@ -1,0 +1,10 @@
+{
+  "name": "diagon",
+  "version": "1.0.128",
+  "main": "diagon.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmagder/Diagon.git"
+  },
+  "license": "MIT"
+}
