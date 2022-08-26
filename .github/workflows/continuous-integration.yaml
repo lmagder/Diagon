@@ -207,7 +207,9 @@ jobs:
           cp diagon.js diagon-Web;
           cp package.json diagon-Web;
           cp diagon*wasm diagon-Web;
-          tar -cvzf diagon-Web.tar.gz diagon-Web;
+          cd diagon-Web;
+          tar -cvzf ../diagon-Web.tar.gz .;
+          cd ..;
 
       - name: "Upload WebAssembly distribution"
         if: ${{ matrix.cc  == 'emcc' }}
