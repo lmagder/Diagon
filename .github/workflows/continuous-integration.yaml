@@ -17,19 +17,19 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: "Linux GCC"
-            os: ubuntu-latest
-            cc: gcc
-            cxx: g++
-            test: true
-            cmake: cmake
+          # - name: "Linux GCC"
+          #   os: ubuntu-latest
+          #   cc: gcc
+          #   cxx: g++
+          #   test: true
+          #   cmake: cmake
 
-          - name: "Linux Clang"
-            os: ubuntu-latest
-            cc: clang
-            cxx: clang++
-            test: true
-            cmake: cmake
+          # - name: "Linux Clang"
+          #   os: ubuntu-latest
+          #   cc: clang
+          #   cxx: clang++
+          #   test: true
+          #   cmake: cmake
 
           - name: "Linux emscripten"
             os: ubuntu-latest
@@ -38,12 +38,12 @@ jobs:
             test: false
             cmake: "emcmake cmake"
 
-          - name: "MacOS GCC"
-            os: macos-latest
-            cc: /usr/local/opt/gcc/bin/gcc-11
-            cxx: /usr/local/opt/gcc/bin/g++-11
-            test: true
-            cmake: cmake
+          # - name: "MacOS GCC"
+          #   os: macos-latest
+          #   cc: /usr/local/opt/gcc/bin/gcc-11
+          #   cxx: /usr/local/opt/gcc/bin/g++-11
+          #   test: true
+          #   cmake: cmake
 
           #- name: "Windows MSVC"
             #os: windows-latest
