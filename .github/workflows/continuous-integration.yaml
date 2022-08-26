@@ -82,7 +82,7 @@ jobs:
 
       - name: "Setup Emscripten"
         if: ${{ matrix.cc  == 'emcc' }}
-        uses: mymindstorm/setup-emsdk@v7
+        uses: mymindstorm/setup-emsdk@v11
 
       - name: "Build debug mode"
         run: >
@@ -136,7 +136,7 @@ jobs:
             cc: emcc
             cxx: em++
             cmake: "emcmake cmake"
-            asset_path: build/diagon-Web.zip
+            asset_path: build/diagon-Web.tar.gz
 
           #- name: "MacOS clang"
             #os: macos-latest
@@ -210,7 +210,7 @@ jobs:
           cp style.css diagon-Web;
           cp run_diagon.sh diagon-Web;
           chmod a+x ./diagon-Web/run_diagon.sh;
-          zip -r diagon-Web.zip diagon-Web;
+          tar -cvzf diagon-Web.tar.gz diagon-Web;
 
       - name: "Upload WebAssembly distribution"
         if: ${{ matrix.cc  == 'emcc' }}
