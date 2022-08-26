@@ -47,7 +47,8 @@ int main(int, const char**) {
   for (auto& dir : std::filesystem::directory_iterator(path)) {
     std::string translator_name;
     std::string options;
-    ParseDirectoryName(dir.path().filename(), &translator_name, &options);
+    ParseDirectoryName(dir.path().filename().string(), &translator_name,
+                       &options);
 
     for (auto& test : std::filesystem::directory_iterator(dir.path())) {
       auto translator = FindTranslator(translator_name);

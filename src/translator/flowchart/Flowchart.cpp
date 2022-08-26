@@ -296,7 +296,8 @@ std::vector<std::wstring_view> Broke(std::wstring_view content, int size) {
         last_line_size = word.size();
       } else {
         int size = std::distance(lines.back().begin(), word.end());
-        auto concat = std::wstring_view(lines.back().begin(), size);
+        auto concat =
+            std::wstring_view(lines.back().data(), size);
         lines.back() = concat;
         last_line_size = size;
       }

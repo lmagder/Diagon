@@ -20,6 +20,7 @@ std::string API(const Translator::Widget& type) {
     case Translator::Widget::Checkbox:
       return "checkbox";
   }
+  return "";
 }
 
 json API(const Translator::OptionDescription& option) {

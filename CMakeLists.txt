@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required (VERSION 3.15)
 
 set(git_version 0)
 find_package(Git)
@@ -76,6 +76,7 @@ function(target_set_common target)
     target_compile_options(${target} PRIVATE "/wd4267")
     target_compile_options(${target} PRIVATE "/wd4996")
     target_compile_options(${target} PRIVATE "/wd4305")
+    set_target_properties(${target} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   else()
     target_compile_options(${target} PRIVATE "-Wall")
     target_compile_options(${target} PRIVATE "-Wno-sign-compare")
@@ -187,9 +188,6 @@ if (EMSCRIPTEN)
   #set_target_properties(diagon PROPERTIES SUFFIX ".wasm")
 
 else()
-  target_link_libraries(diagon_lib PRIVATE -static-libstdc++)
-  target_link_libraries(diagon_lib PRIVATE stdc++fs)
-
   install(TARGETS diagon RUNTIME DESTINATION "bin")
 
   add_executable(input_output_test src/input_output_test.cpp)
