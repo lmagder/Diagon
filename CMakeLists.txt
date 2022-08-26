@@ -14,7 +14,7 @@ message(STATUS "diagon git_version: ${git_version}")
 
 project(Diagon
   LANGUAGES C CXX
-  VERSION 1.0.127
+  VERSION 1.0.128
 )
 
 include(FetchContent)
