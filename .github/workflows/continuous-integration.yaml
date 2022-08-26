@@ -124,12 +124,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: "Linux Clang"
-            os: ubuntu-latest
-            cc: clang
-            cxx: clang++
-            cmake: cmake
-            asset_path: build/diagon*Linux*
+          # - name: "Linux Clang"
+          #   os: ubuntu-latest
+          #   cc: clang
+          #   cxx: clang++
+          #   cmake: cmake
+          #   asset_path: build/diagon*Linux*
 
           - name: "Linux emscripten"
             os: ubuntu-latest
