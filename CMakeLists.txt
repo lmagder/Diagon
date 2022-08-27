@@ -14,7 +14,7 @@ message(STATUS "diagon git_version: ${git_version}")
 
 project(Diagon
   LANGUAGES C CXX
-  VERSION 1.0.128
+  VERSION ${git_version}
 )
 
 include(FetchContent)
@@ -160,13 +160,10 @@ if (EMSCRIPTEN)
   string(APPEND CMAKE_CXX_FLAGS " -s WASM=1")
   string(APPEND CMAKE_CXX_FLAGS " --closure 1")
   string(APPEND CMAKE_CXX_FLAGS " -fexceptions")
-  string(APPEND CMAKE_CXX_FLAGS " -sUSE_BOOST_HEADERS")
-  #string(APPEND CMAKE_CXX_FLAGS " -s STANDALONE_WASM")
-  #string(APPEND CMAKE_CXX_FLAGS " -s WASM_ASYNC_COMPILATION=0")
-  #string(APPEND CMAKE_CXX_FLAGS " -s SIDE_MODULE=1")
-  #string(APPEND CMAKE_CXX_FLAGS " -s DISABLE_EXCEPTION_CATCHING=0")
+  string(APPEND CMAKE_CXX_FLAGS " -s USE_BOOST_HEADERS")
+  string(APPEND CMAKE_CXX_FLAGS " -s ENVIRONMENT=node")
   string(APPEND CMAKE_CXX_FLAGS " -s EXPORTED_FUNCTIONS='[\"_translate\", \"_main\", \"_API\"]'")
-  string(APPEND CMAKE_CXX_FLAGS " -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\",\"cwrap\"]'")
+  string(APPEND CMAKE_CXX_FLAGS " -s EXPORTED_RUNTIME_METHODS='[\"ccall\",\"cwrap\"]'")
 
   option(ADD_GOOGLE_ANALYTICS "Build the static library" ON)
   if (ADD_GOOGLE_ANALYTICS)
@@ -179,7 +176,9 @@ if (EMSCRIPTEN)
       "style.css"
       "index.html"
       "run_diagon.sh"
-      "package.json")
+      "package.json"
+      "diagon.d.ts"
+      )
     configure_file(
       ${CMAKE_CURRENT_SOURCE_DIR}/src/${file}
       ${CMAKE_CURRENT_BINARY_DIR}/${file}
