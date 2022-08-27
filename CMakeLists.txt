@@ -118,6 +118,7 @@ add_subdirectory(src/screen)
 add_subdirectory(src/translator/frame)
 add_subdirectory(src/translator/grammar)
 add_subdirectory(src/translator/graph_dag)
+add_subdirectory(src/translator/graph_undirected)
 add_subdirectory(src/translator/graph_planar)
 add_subdirectory(src/translator/math)
 add_subdirectory(src/translator/flowchart)
@@ -138,6 +139,7 @@ target_link_libraries(diagon_lib
   PRIVATE translator_frame
   PRIVATE translator_grammar
   PRIVATE translator_graph_dag
+  PRIVATE translator_graph_undirected
   PRIVATE translator_graph_planar
   PRIVATE translator_math
   PRIVATE translator_flowchart

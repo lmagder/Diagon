@@ -5,6 +5,7 @@
 TranslatorPtr FrameTranslator();
 TranslatorPtr GrammarTranslator();
 TranslatorPtr GraphDAGTranslator();
+TranslatorPtr GraphUndirectedTranslator();
 TranslatorPtr GraphPlanarTranslator();
 TranslatorPtr MathTranslator();
 TranslatorPtr SequenceTranslator();
@@ -24,6 +25,7 @@ std::vector<TranslatorPtr>& TranslatorList() {
   out.push_back(GrammarTranslator());
   out.push_back(FrameTranslator());
   out.push_back(GraphDAGTranslator());
+  out.push_back(GraphUndirectedTranslator());
   out.push_back(GraphPlanarTranslator());
   out.push_back(FlowchartTranslator());
 
