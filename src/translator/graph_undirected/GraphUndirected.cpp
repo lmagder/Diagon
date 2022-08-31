@@ -126,7 +126,8 @@ std::string GraphUndirected::Translate(const std::string& input,
   for (const auto& e : inputEdges)
     boost::add_edge(e.first, e.second, graph);
 
-  boost::square_topology<> topo(boost::random::minstd_rand(42));
+  auto rnd = boost::random::minstd_rand(42);
+  boost::square_topology<> topo(rnd);
 
   boost::random_graph_layout(graph, boost::get(&Node::pt, graph), topo);
   boost::fruchterman_reingold_force_directed_layout(
