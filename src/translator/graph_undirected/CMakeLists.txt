@@ -1,12 +1,16 @@
 find_package(Boost COMPONENTS graph)
 
 if (Boost_FOUND OR EMSCRIPTEN)
+  ANTLR(GraphUndirected.g4)
   add_library(translator_graph_undirected STATIC
+    GraphUndirectedLexer.cpp
+    GraphUndirectedParser.cpp
     GraphUndirected.cpp
   )
 
   target_link_libraries(translator_graph_undirected
     PRIVATE diagon_base
+    PRIVATE antlr4_static
   )
 
   if (Boost_FOUND)
