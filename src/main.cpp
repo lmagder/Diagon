@@ -3,9 +3,14 @@
 // the LICENSE file.
 
 #include <iostream>
+#include <fstream>
 #include "api.hpp"
 #include "environment.h"
 #include "translator/Factory.h"
+#ifdef _WIN32
+#define NOMINMAX
+#include <Windows.h>
+#endif
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
@@ -82,6 +87,9 @@ TRANSLATOR-OPTIONS:
                  is read from the standard input.
 
   -option=value: Provide a translator specific option.
+
+  -input <filename>: Provide input from a file
+
 
 COOKBOOK:
   Reading from:
@@ -223,6 +231,13 @@ int Translate(Translator* translator,
     if (argument == "--examples")
       return PrintTranslatorExamples(translator);
 
+    if (argument == "--input") {
+      std::string file_name = next_argument();
+      std::getline(std::ifstream(file_name.c_str()), input, '\0');
+      has_input = true;
+      continue;
+    }
+
     if (argument == "--") {
       input = read_remaining_args();
       has_input = true;
@@ -281,6 +296,12 @@ int PrintAPI() {
 }  // namespace
 
 int main(int argument_count, const char** arguments) {
+
+#ifdef _WIN32
+  // Set console code page to UTF-8 so console known how to interpret string
+  // data
+  SetConsoleOutputCP(CP_UTF8);
+#endif
   if (argument_count <= 1)
     return PrintHelp();
   std::string argument_1 = arguments[1];

@@ -42,13 +42,6 @@ std::vector<Translator::OptionDescription> GraphUndirected::Options() {
 std::vector<Translator::Example> GraphUndirected::Examples() {
   return {
       {
-          "if then else loop",
-          "if -> \"then A\" -> end\n"
-          "if -> \"then B\" -> end\n"
-          "end -> loop -> if",
-      },
-      {
-          "test",
           "A -- B\n"
           "A -- C\n"
           "A -- D -- G\n"
@@ -132,7 +125,26 @@ std::string GraphUndirected::Translate(const std::string& input,
   boost::random_graph_layout(graph, boost::get(&Node::pt, graph), topo);
   boost::fruchterman_reingold_force_directed_layout(
       graph, boost::get(&Node::pt, graph), topo);
-  return "";
+
+  auto convertPt = [](boost::square_topology<>::point pt) {
+    return std::array<int, 2>({int((pt[0] * 0.5 + 0.5) * 5 * 15), int((pt[1] * 0.5 + 0.5) * 5 * 3)});
+  };
+
+  // Determine the screen dimension
+  int width = 100;
+  int height = 25;
+  for (const auto& v : graph.m_vertices) {
+    auto cpt = convertPt(v.m_property.pt);
+    width = std::max(width, cpt[0] + 1 + int(v.m_property.label.length()));
+    height = std::max(height, cpt[1] + 3);
+  }
+  Screen screen(width, height);
+
+  for (const auto& v : graph.m_vertices) {
+    auto cpt = convertPt(v.m_property.pt);
+    screen.DrawBoxedText(cpt[0], cpt[1], to_wstring(v.m_property.label));
+  }
+  return screen.ToString();
 }
 std::unique_ptr<Translator> GraphUndirectedTranslator() {
   return std::make_unique<GraphUndirected>();
